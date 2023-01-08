@@ -46,10 +46,6 @@ def str_to_dict_if_possible(str_data):
         if len(key_and_value) == 2:
             dict_data[key_and_value[0].strip()] = str_to_int_if_possible(key_and_value[1].strip())
 
-    print(str_data)
-    # print(type(dict_data))
-    print(dict_data)
-
     if len(dict_data) == 0:
         print("не удалось получить значения из строки")
         return None
