@@ -1,16 +1,5 @@
-# This is a sample Python script.
+import case1
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+str_data = input('input arguments (example: aaa=1, sum1=1, sum2=2.1, bbb="bbb", sum3=100, sum4="one hundred"): ')
+case1.case1_func(str_data)
 
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
