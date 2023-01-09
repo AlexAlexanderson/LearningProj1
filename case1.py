@@ -1,23 +1,3 @@
-def str_to_int_if_possible(value):
-    """
-    преобразование строки в число если возможно
-    :param value:
-    :return:
-    """
-
-    value_is_float = False
-
-    for s in value:
-        if not (s == "-" or s == '.' or s.isdigit()):
-            return value
-        if s == '.':
-            value_is_float = True
-    if value_is_float:
-        return float(value)
-    else:
-        return int(value)
-
-
 def case1_func(**dict_data):
     """
     ТЗ Кейса:
@@ -36,37 +16,43 @@ def case1_func(**dict_data):
 
     for key, value in dict_data.items():
         if key.find('sum') != -1:
-            if value is int or value is float:  # если значение число - просто просуммируем
-                # print(key, value)
+            if isinstance(value, int) or isinstance(value, float):  # если значение число - просто просуммируем
                 result['sum'] += value
                 result[key] = value
-            elif value is str:  # если значение строка - преобразуем в число и просуммируем
+            elif isinstance(value, str):  # если значение строка - преобразуем в число и просуммируем
                 value_is_float = False
+                value_is_digit = True
                 for s in value:
                     if not (s == "-" or s == '.' or s.isdigit()):
-                        return value
+                        value_is_digit = False
+                        break
                     if s == '.':
                         value_is_float = True
-                if value_is_float:
+                if value_is_digit and value_is_float:
                     value = float(value)
                     result['sum'] += value
                     result[key] = value
-                else:
+                elif value_is_digit:
                     value = int(value)
                     result['sum'] += value
                     result[key] = value
-            elif type(value) == dict:  # если значение словарь - вызовем рекурсивно
-                rec_result = case1_func(sum=value)
+                else: # не получилось преобразовать в число - выводим предупреждение и игнорируем
+                    print(key, value, "(value is not a number ", type(value), ")")
+            elif isinstance(value, dict):  # если значение словарь - вызовем функцию рекурсивно
+                rec_result = case1_func(**value)
                 """
                 так сложно потому что нужно из рекурсивного результата sum просуммировать к основному результату, 
-                а остальные ключи добавить
-                """
+                а остальные ключи просто добавить, но учесть что если в рекурсивном результате есть ключи уже
+                присутствующие в основном, то их тоже нужно просуммировать а не переписать
+                 """
                 for r_key, r_value in rec_result.items():
                     if r_key == 'sum':
                         result['sum'] += r_value
+                    elif r_key in result:
+                        result[r_key] += r_value
                     else:
                         result[r_key] = r_value
-            else:
+            else: # на случай прочих типов кроме строк, чисел и словарей
                 print(key, value, "(value is not a number ", type(value), ")")
 
     return result

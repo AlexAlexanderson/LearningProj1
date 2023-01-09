@@ -39,9 +39,29 @@ def str_to_dict_if_possible(str_data):
         return dict_data
 
 
-str_data = input('input arguments (example: aaa=1, sum1=1, sum2=2.1, bbb="bbb", sum3=100, sum4="one hundred"): ')
-dict_data = str_to_dict_if_possible(str_data)
-if dict_data is None:
-    print("unable to get values from string")
-else:
-    print(case1.case1_func(sum=dict_data))
+# str_data = input('input arguments (example: aaa=1, sum1=1, sum2=2.1, bbb="bbb", sum3=100, sum4="one hundred"): ')
+# dict_data = str_to_dict_if_possible(str_data)
+# if dict_data is None:
+#     print("unable to get values from string")
+# else:
+#     print(case1.case1_func(**dict_data))
+
+param = {
+    'aaa': 1,
+    'sum1': 1,
+    'sum2': 2.1,
+    'bbb': 'bbb',
+    'sum3': 100,
+    'sum4': 'one hundred',
+    'sum5': {
+        'sum6': 1000,
+        'sum7': 2000,
+        'ccc': 3000,
+        'sum1': 20,
+        'sum200': {
+            'sum201': 100,
+            'sum202': 100
+        }
+    }
+}
+print(case1.case1_func(**param))
