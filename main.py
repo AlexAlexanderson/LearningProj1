@@ -1,13 +1,15 @@
 import case1
 import unicodedata
 
+
 def remove_control_characters(s):
     """
     со stackoverflow: удаление управляющих символов
     :param s:
     :return:
     """
-    return "".join(ch for ch in s if unicodedata.category(ch)[0]!="C")
+    return "".join(ch for ch in s if unicodedata.category(ch)[0] != "C")
+
 
 def str_to_int_if_possible(value):
     """
@@ -19,7 +21,7 @@ def str_to_int_if_possible(value):
     value_is_float = False
 
     for s in value:
-        if (s == "-" or s == '.' or s.isdigit()) != True:
+        if not (s == "-" or s == '.' or s.isdigit()):
             return value
         if s == '.':
             value_is_float = True
@@ -27,6 +29,7 @@ def str_to_int_if_possible(value):
         return float(value)
     else:
         return int(value)
+
 
 def str_to_dict_if_possible(str_data):
     """
@@ -51,16 +54,15 @@ def str_to_dict_if_possible(str_data):
             dict_data[key_and_value[0].strip()] = str_to_int_if_possible(key_and_value[1].strip())
 
     if len(dict_data) == 0:
-        print("unable to get values from string")
         return None
+        # return dict_data
     else:
         return dict_data
 
+
 str_data = input('input arguments (example: aaa=1, sum1=1, sum2=2.1, bbb="bbb", sum3=100, sum4="one hundred"): ')
-
-dict_data = str_to_dict_if_possible(string_data)
-    if dict_data == None:
-        return
-
-case1.case1_func(str_data)
-
+dict_data = str_to_dict_if_possible(str_data)
+if dict_data is None:
+    print("unable to get values from string")
+else:
+    case1.case1_func(dict_data)
