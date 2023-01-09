@@ -1,6 +1,3 @@
-"""
-Кейс 1
-"""
 import case1
 import unicodedata
 import re
